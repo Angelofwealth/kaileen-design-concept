@@ -234,17 +234,36 @@
   }
 
   /* ---------- clients strip ---------- */
-  .clients-strip{background:var(--ink);border-bottom:1px solid rgba(207,198,182,0.14);}
-  .clients-inner{display:flex;align-items:center;gap:22px;padding:18px 28px;flex-wrap:wrap;}
-  .clients-lbl{font-family:'IBM Plex Mono';font-size:11.5px;letter-spacing:0.09em;text-transform:uppercase;color:#8a7d68;flex:none;}
-  .clients-names{display:flex;align-items:center;gap:14px;flex-wrap:wrap;row-gap:8px;}
-  .clients-names span{font-family:'Teko';font-size:19px;letter-spacing:0.02em;color:#e4dccb;font-weight:500;}
-  .clients-names .sep{color:#5c5142;font-family:'IBM Plex Sans';font-size:14px;}
+  .partners{background:var(--ink);border-bottom:1px solid rgba(207,198,182,0.14);padding:38px 0;overflow:hidden;}
+  .partners-head{max-width:var(--maxw);margin:0 auto 26px;padding:0 28px;display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .partners-lbl{font-family:'IBM Plex Mono';font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:#8a7d68;}
+  .partners-note{font-family:'IBM Plex Mono';font-size:11px;letter-spacing:0.04em;color:#5c5142;}
+  .marquee{position:relative;-webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);}
+  .marquee-track{display:flex;align-items:stretch;gap:18px;width:max-content;animation:marqueeScroll 32s linear infinite;}
+  .marquee:hover .marquee-track{animation-play-state:paused;}
+  @keyframes marqueeScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  @media (prefers-reduced-motion: reduce){
+    .marquee-track{animation:none;}
+    .marquee{overflow-x:auto;}
+  }
+  .partner-card{
+    flex:none;display:flex;align-items:center;gap:14px;padding:18px 24px;
+    border:1px solid rgba(207,198,182,0.16);border-radius:3px;background:rgba(244,240,230,0.03);
+    min-width:300px;
+  }
+  .partner-mono{
+    flex:none;width:44px;height:44px;border-radius:2px;display:flex;align-items:center;justify-content:center;
+    font-family:'Teko';font-weight:600;font-size:16px;letter-spacing:0.02em;color:#17130f;
+    background:linear-gradient(155deg, var(--camel), var(--clay-strong));
+  }
+  .partner-text .pn{font-family:'Teko';font-size:21px;letter-spacing:0.01em;color:#f4f0e6;line-height:1.05;}
+  .partner-text .pc{font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:0.05em;text-transform:uppercase;color:#8a7d68;margin-top:4px;}
   @media (max-width:760px){
-    .clients-inner{padding:16px 20px;gap:10px;}
-    .clients-names span{font-size:17px;}
-    .clients-names .sep{display:none;}
-    .clients-names{flex-direction:column;align-items:flex-start;gap:6px;}
+    .partners{padding:30px 0;}
+    .partners-head{padding:0 20px;}
+    .partner-card{min-width:250px;padding:15px 18px;gap:11px;}
+    .partner-mono{width:38px;height:38px;font-size:14px;}
+    .partner-text .pn{font-size:18px;}
   }
 
   /* ---------- generic section ---------- */
@@ -263,11 +282,19 @@
   .about-img{position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);aspect-ratio:4/3.1;}
   .about-img img{width:100%;height:100%;object-fit:cover;}
   .about-img .tag{position:absolute;left:14px;bottom:14px;background:rgba(23,19,15,0.72);color:#f4f0e6;font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:0.08em;padding:7px 11px;border-radius:2px;text-transform:uppercase;}
-  .vm-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:36px;}
-  .vm-card h4{font-size:24px;color:var(--clay);margin-bottom:8px;letter-spacing:0.04em;}
-  .vm-card p{margin:0;color:var(--ink-soft);font-size:16.5px;}
-  .pill-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
-  .pill{font-family:'IBM Plex Mono';font-size:11.5px;letter-spacing:0.04em;border:1px solid var(--line-strong);padding:7px 11px;border-radius:2px;color:var(--ink-soft);text-transform:uppercase;}
+
+  .brief-lead{color:var(--ink-soft);margin-top:22px;font-size:17px;max-width:56ch;line-height:1.7;}
+  .vm-stack{margin-top:44px;display:flex;flex-direction:column;gap:0;}
+  .vm-block{border-top:1px solid var(--line);padding:32px 0;display:grid;grid-template-columns:64px 1fr;gap:20px;}
+  .vm-block:last-child{border-bottom:1px solid var(--line);}
+  .vm-block .vn{font-family:'Teko';font-size:44px;color:var(--line-strong);line-height:1;letter-spacing:0.02em;}
+  .vm-block.is-vision .vn{color:var(--clay);}
+  .vm-block h4{font-family:'IBM Plex Mono';font-size:12.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--clay);font-weight:500;}
+  .vm-block .statement{font-family:'Teko';font-size:clamp(24px,2.4vw,30px);font-weight:500;text-transform:none;letter-spacing:0.005em;line-height:1.18;margin-top:10px;color:var(--ink);max-width:44ch;}
+  .vm-block p.sub{margin:12px 0 0;color:var(--ink-soft);font-size:16px;max-width:48ch;}
+  .commit-list{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .commit-list li{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--ink);}
+  .commit-list svg{flex:none;width:16px;height:16px;color:var(--good);}
 
   /* ---------- values ---------- */
   .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
@@ -614,15 +641,45 @@
   </div>
 </div>
 
-<div class="clients-strip">
-  <div class="wrap clients-inner">
-    <span class="clients-lbl">Trusted on site by</span>
-    <div class="clients-names">
-      <span>Brains &amp; Hammers Limited</span>
-      <span class="sep">&middot;</span>
-      <span>NNPC Staff Multi&#8209;Purpose Co&#8209;Operative</span>
-      <span class="sep">&middot;</span>
-      <span>Private Clients &mdash; Asokoro, Maitama &amp; Guzape</span>
+<div class="partners">
+  <div class="partners-head">
+    <span class="partners-lbl">Delivered Alongside</span>
+    <span class="partners-note">8 contracts &middot; 2012&ndash;2020</span>
+  </div>
+  <div class="marquee">
+    <div class="marquee-track" aria-hidden="false">
+      <div class="partner-card">
+        <div class="partner-mono">B&amp;H</div>
+        <div class="partner-text"><div class="pn">Brains &amp; Hammers Limited</div><div class="pc">Estate Infrastructure &middot; Industrial</div></div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-mono">NNPC</div>
+        <div class="partner-text"><div class="pn">NNPC Staff Multi&#8209;Purpose Co&#8209;Operative</div><div class="pc">Road &amp; Land Infrastructure</div></div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-mono">PRC</div>
+        <div class="partner-text"><div class="pn">Private Residential Clients</div><div class="pc">Asokoro &middot; Maitama &middot; Guzape</div></div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-mono">BPP</div>
+        <div class="partner-text"><div class="pn">Bureau of Public Procurement</div><div class="pc">Interim Registration &middot; Verified</div></div>
+      </div>
+      <div class="partner-card" aria-hidden="true">
+        <div class="partner-mono">B&amp;H</div>
+        <div class="partner-text"><div class="pn">Brains &amp; Hammers Limited</div><div class="pc">Estate Infrastructure &middot; Industrial</div></div>
+      </div>
+      <div class="partner-card" aria-hidden="true">
+        <div class="partner-mono">NNPC</div>
+        <div class="partner-text"><div class="pn">NNPC Staff Multi&#8209;Purpose Co&#8209;Operative</div><div class="pc">Road &amp; Land Infrastructure</div></div>
+      </div>
+      <div class="partner-card" aria-hidden="true">
+        <div class="partner-mono">PRC</div>
+        <div class="partner-text"><div class="pn">Private Residential Clients</div><div class="pc">Asokoro &middot; Maitama &middot; Guzape</div></div>
+      </div>
+      <div class="partner-card" aria-hidden="true">
+        <div class="partner-mono">BPP</div>
+        <div class="partner-text"><div class="pn">Bureau of Public Procurement</div><div class="pc">Interim Registration &middot; Verified</div></div>
+      </div>
     </div>
   </div>
 </div>
@@ -635,21 +692,27 @@
       <div class="reveal">
         <div class="eyebrow">Corporate Brief</div>
         <h2 class="section-head" style="margin-bottom:0;">Full engagement,<br>blueprint to handover</h2>
-        <p style="color:var(--ink-soft);margin-top:22px;font-size:16px;max-width:54ch;">
+        <p class="brief-lead">
           Kaileen Systems and Services Limited is fully engaged in all forms of building, civil, infrastructure and environmental engineering works, with a track record of delivering high-quality projects in strict compliance with construction standards. Years before our registration as a limited liability company in 2021, we were already demonstrating this same commitment on sites across the FCT.
         </p>
-        <div class="vm-grid">
-          <div class="vm-card">
-            <h4>Vision</h4>
-            <p>Towards becoming a preferred construction company globally, as a result of the standard of our project delivery &mdash; breaking bounds through consistent innovation.</p>
+        <div class="vm-stack">
+          <div class="vm-block is-vision">
+            <div class="vn">01</div>
+            <div>
+              <h4>Our Vision</h4>
+              <p class="statement">Towards becoming a preferred construction company globally, as a result of the standard of our project delivery &mdash; breaking bounds through consistent innovation.</p>
+            </div>
           </div>
-          <div class="vm-card">
-            <h4>Mission</h4>
-            <p>To place our clients&rsquo; interest and satisfaction at the forefront of everything we build.</p>
-            <div class="pill-row">
-              <span class="pill">Transparent Communication</span>
-              <span class="pill">On&#8209;Time Delivery</span>
-              <span class="pill">Meticulous Detail</span>
+          <div class="vm-block is-mission">
+            <div class="vn">02</div>
+            <div>
+              <h4>Our Mission</h4>
+              <p class="statement">To place our clients&rsquo; interest and satisfaction at the forefront of everything we build.</p>
+              <ul class="commit-list">
+                <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Transparent communication, start to finish</li>
+                <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> On&#8209;time project delivery</li>
+                <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Meticulous attention to detail</li>
+              </ul>
             </div>
           </div>
         </div>
